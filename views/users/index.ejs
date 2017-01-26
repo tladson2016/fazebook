@@ -6,5 +6,26 @@
   </head>
   <body>
     <h1>Welcome to fazbook</h1>
+    <a href="/users/new">Create a user</a>
+    <% users.forEach(function(user){ %>
+      <div>
+      <span><%= user.firstName %></span>
+      <span><%= user.lastName %></span>
+      <span><%= user.email %></span>
+      <span><%= user.dob %></span>
+
+      <form action="<% '/users/' + user.id + '?_method=DELETE' %>" method="POST">
+        <input type="submit" value="X">
+        <!-- html form can only send in a form or post or get request
+            This is method overriding.
+            The request is sent as a post request. The server sees it as post request
+            but also has the power to override the request which is why were using a form and hacking the request.
+            This is sending a post request.
+
+        -->
+      </form>
+      </div>
+    <% }) %>
+
   </body>
 </html>
