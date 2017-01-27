@@ -13,6 +13,10 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/new', function(req,res,next){
+  res.render('users/new')
+})
+
 router.post('/', function(req, res, next){
   models.User.create({
     firstName: req.body.firstName,
@@ -33,8 +37,11 @@ router.delete('/:id', function(req, res, next){
   });
 });
 
+router.get('/:id', function(req, res, next) {
+  models.User.findById(req.params.id).then(function(user) {
+    res.render('users/show', { user: user });
+  });
+});
 
-router.get('/new', function(req,res,next){
-  res.render('users/new')
-})
+
 module.exports = router;
